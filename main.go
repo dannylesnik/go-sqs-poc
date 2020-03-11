@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/service/sqs"
-	"github.com/go-sqs-poc/queueing"
+	"github.com/dannylesnik/go-sqs-poc/queueing"
 )
 
 //Env -
@@ -25,7 +25,7 @@ func (env *Env) handleMessage(counter int) {
 	fmt.Printf("Handler with id [%d] started.\n\n", counter)
 	for message := range env.ChnMessages {
 		fmt.Printf("[Receive message] by thread [%d] received from channel \n%v \n\n", counter, *message.MessageId)
-	    time.Sleep(5 * time.Minute)
+		time.Sleep(5 * time.Minute)
 
 		err := env.SQS.DeleteMSG(message)
 		if err != nil {
